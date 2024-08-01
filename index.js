@@ -27,9 +27,13 @@ io.on("connection", (socket) => {
     console.log("user joined-->", roomId, userId);
     socket.join(roomId);
     socket.to(roomId).emit("user-connected", userId);
+
+    socket.to(roomId).emit("message", "Server", "Welcome to the room!");
+
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected", userId);
     });
+    
     socket.on("message", (senderUserId, message) => {
       console.log("message", message);
       io.to(roomId).emit("message", senderUserId, message);
