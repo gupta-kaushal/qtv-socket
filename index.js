@@ -28,8 +28,6 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     socket.to(roomId).emit("user-connected", userId);
 
-    socket.to(roomId).emit("message", {message: 'Kaushi dear.... MC', notificationFor: 'Kaushal'});
-
     socket.on("disconnect", () => {
       socket.to(roomId).emit("user-disconnected", userId);
     });
